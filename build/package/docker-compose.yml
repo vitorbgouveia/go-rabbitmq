@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+  web:
+    build: 
+      context: ./../../
+      dockerfile: build/package/Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+          - RABBITMQ_HOST=rabbitmq
